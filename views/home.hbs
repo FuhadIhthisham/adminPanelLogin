@@ -1,0 +1,112 @@
+<div class="sticky-top">
+<header class="p-3 bg-dark text-white">
+  <div class="">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+
+      <ul
+        class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0"
+      >
+        <li><a href="" class="nav-link px-2 text-secondary">Home</a></li>
+        <li><a href="#card" class="nav-link px-2 text-white">Cards</a></li>
+        <li><a href="#list" class="nav-link px-2 text-white">List</a></li>
+        <li><a href="#table" class="nav-link px-2 text-white">Table</a></li>
+      </ul>
+
+      <div class="dropdown">
+        <a
+          class="btn btn-secondary dropdown-toggle"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+
+        {{#if user}}
+            {{user.name}}
+        {{else}}
+            Account
+        {{/if}}
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          {{#if user}}
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          {{else}}
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+          {{/if}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+</div>
+
+<div class="d-flex h-100 text-center text-white bg-dark">
+
+  <div class="cover-container d-flex p-3 mx-auto my-auto flex-column">
+    <main class="px-3">
+      <h1>Home Page</h1>
+      <p class="lead">“Live the Life of Your Dreams
+        When you start living the life of your dreams, there will always be obstacles, doubters, mistakes and setbacks along the way. 
+        But with hard work, perseverance and self-belief there is no limit to what you can achieve.”</p>
+      <p class="text-center text-muted">-Roy T. Bennett - <br> The Light in the Heart</p>
+    </main>
+  </div>
+</div>
+
+<div class="container bg-light row my-5 py-5 mx-auto">
+
+  <h1 class="text-center my-5">Cards</h1>
+
+
+  <div class="card me-4" id="card" style="width: 15rem;">
+    <img
+      src="{{this.img}}"
+      class="card-img-top pt-5 pb-3 px-3"
+      alt="..."
+    />
+    <div class="card-body">
+      <h5 class="card-title fs-4 text-secondary">fuhad  </h5>
+      <p class="card-text"> <b>Storyline: </b>fuhad </p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><b>Rating: </b> fuhad}</li>
+        <li class="list-group-item"><b>Genere:</b> fuhad</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="container bg-light row my-5 mx-auto">
+  <div class="card my-5 mx-auto" style="width: 25rem;">
+    <h1 class="text-center my-5" id="list">List</h1>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">fuhad</li>
+  </div>
+</div>
+
+
+<div class="container bg-light row my-5 mx-auto">
+    <h1 class="text-center my-5" id="table">Table</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">SN</th>
+      <th scope="col">Name</th>
+      <th scope="col">Mark</th>
+      <th scope="col">Percentage</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>fuhad</td>
+        <td>fuhad</td>
+        <td>fuhad</td>
+        <td>fuhad</td>
+      </tr>
+  </tbody>
+</table>
+</div>

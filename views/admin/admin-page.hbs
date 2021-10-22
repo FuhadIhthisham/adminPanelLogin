@@ -1,0 +1,75 @@
+<div class="sticky-top">
+<header class="p-3 bg-dark text-white">
+  <div class="">
+    <div
+      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+    >
+
+      <ul
+        class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0"
+      >
+        <li><a href="" class="nav-link px-2 text-secondary">Home</a></li>
+        <li><a href="#card" class="nav-link px-2 text-white">Cards</a></li>
+        <li><a href="#list" class="nav-link px-2 text-white">List</a></li>
+        <li><a href="#table" class="nav-link px-2 text-white">Table</a></li>
+      </ul>
+
+      <div class="dropdown">
+        <a
+          class="btn btn-secondary dropdown-toggle"
+          href="#"
+          role="button"
+          id="dropdownMenuLink"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+            Account
+        </a>
+
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="/">Logout</a></li>
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+</div>
+
+<div class="d-flex h-100 text-center text-white bg-dark">
+
+  <div class="cover-container d-flex p-3 mx-auto my-auto flex-column">
+    <main class="px-3">
+      <h1>Admin Page</h1>
+    </main>
+  </div>
+</div>
+
+<div class="container bg-light row my-5 mx-auto">
+    <h1 class="text-center my-5" id="table">Users List</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">User Name</th>
+      <th scope="col">E-Mail</th>
+      <th scope="col">Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each user}}
+        <tr>
+          
+          <td>{{this.name}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.date}}</td>
+          <td> 
+            <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are You Sure To Delete User {{this.name}}')">Delete</a> 
+            <a href="/admin/" class="btn btn-primary">Edit</a> 
+            </td>
+        </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>

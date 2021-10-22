@@ -1,0 +1,61 @@
+<section class="gradient-custom">
+  <div class="container py-5 h-100">
+    <div
+      class="row d-flex justify-content-center align-items-center h-100 my-auto"
+    >
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div
+          class="card bg-dark text-white shadow-lg p-3 mb-5"
+          style="border-radius: 1rem 4.5rem;"
+        >
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-0 mt-md-4 pb-5">
+              <form action="/login" id="login-form" method="post">
+                <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typeEmailX">E-mail</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="typeEmailX"
+                    class="form-control form-control-lg"
+                    placeholder="E-Mail"
+                  />
+
+                </div>
+
+                <div class="form-outline form-white mb-4">
+                  <label class="form-label" for="typePasswordX">Password</label>
+                  <input
+                    type="password"
+                    name="pwd"
+                    id="typePasswordX"
+                    class="form-control form-control-lg"
+                    placeholder="Password"
+                  />
+
+                  {{#if loginErr}}
+                    <p class="text-white-50 mt-3">
+                      {{loginErr}}
+                    </p>
+                  {{/if}}
+                </div>
+
+                <p class="text-center mt-4 mb-0">Don't have an account?
+                  <a href="/signup" class="fw-bold">Create Account</a>
+                </p>
+
+                <button
+                  class="btn btn-outline-light btn-lg px-5"
+                  type="submit"
+                >Login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

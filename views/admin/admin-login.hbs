@@ -1,28 +1,24 @@
 <section class="gradient-custom">
   <div class="container py-5">
-    <div class="row d-flex justify-content-center align-items-center my-auto">
+    <div
+      class="row d-flex justify-content-center align-items-center h-100 my-auto"
+    >
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
         <div
           class="card bg-dark text-white shadow-lg p-3 mb-5"
           style="border-radius: 1rem 4.5rem;"
         >
           <div class="card-body p-5 text-center">
-            {{signupSuccess}}
-            <div class="mb-md-0 mt-md-4 pb-5">
-              <form action="/login" id="user-login" method="post">
-                <h2 class="fw-bold mb-5 text-uppercase">User Login</h2>
 
-                {{#if userBlocked}}
-                  <p class="text-white-50 mt-3">
-                    Sorry this User is Blocked
-                  </p>
-                {{/if}}
+            <div class="mb-md-0 mt-md-4 pb-5">
+              <form action="/admin/admin-login" id="admin-login" method="post">
+                <h2 class="fw-bold mb-5 text-uppercase">Admin Login</h2>
 
                 <div class="form-outline form-white mb-4">
                   <label class="form-label" for="typeEmailX">E-mail</label>
                   <input
                     type="email"
-                    name="email"
+                    name="adminEmail"
                     id="typeEmailX"
                     class="form-control form-control-lg"
                     placeholder="E-Mail"
@@ -34,32 +30,24 @@
                   <label class="form-label" for="typePasswordX">Password</label>
                   <input
                     type="password"
-                    name="pwd"
+                    name="adminPassword"
                     id="typePasswordX"
                     class="form-control form-control-lg"
                     placeholder="Password"
                   />
 
-                  {{#if loginErr}}
+                  {{#if adminLoginErr}}
                     <p class="text-white-50 mt-3">
-                      {{loginErr}}
+                      Username or password is incorrect
                     </p>
                   {{/if}}
+                  <p class="text-center mt-2 mb-3">
+                  <a
+                    href="/login"
+                    class="fw-bold text-muted text-decoration-none"
+                  >Goto User Login</a>
+                </p>
                 </div>
-
-                <p class="text-center mt-4 mb-0">Don't have an account?
-                  <a
-                    href="/signup"
-                    class="fw-bold text-muted text-decoration-none"
-                  >Create Account</a>
-                </p>
-                <p class="text-center mt-2 mb-3">
-                  <a
-                    href="/admin/admin-login"
-                    class="fw-bold text-muted text-decoration-none"
-                  >Goto Admin Panel</a>
-                </p>
-
                 <button
                   class="btn btn-outline-light btn-lg px-5"
                   type="submit"

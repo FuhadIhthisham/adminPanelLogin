@@ -1,75 +1,192 @@
-<div class="sticky-top">
-<header class="p-3 bg-dark text-white">
-  <div class="">
-    <div
-      class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
-    >
-
-      <ul
-        class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0"
+<div class="sticky-top bg-white">
+  <header class="p-3 mb-3">
+    <div class="container">
+      <div
+        class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
       >
-        <li><a href="" class="nav-link px-2 text-secondary">Home</a></li>
-        <li><a href="#card" class="nav-link px-2 text-white">Cards</a></li>
-        <li><a href="#list" class="nav-link px-2 text-white">List</a></li>
-        <li><a href="#table" class="nav-link px-2 text-white">Table</a></li>
-      </ul>
-
-      <div class="dropdown">
         <a
-          class="btn btn-secondary dropdown-toggle"
-          href="#"
-          role="button"
-          id="dropdownMenuLink"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
+          href="/"
+          class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none"
         >
-            Account
+          <svg
+            class="bi me-2"
+            width="40"
+            height="32"
+            role="img"
+            aria-label="Bootstrap"
+          ><use xlink:href="#bootstrap"></use></svg>
         </a>
 
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="/">Logout</a></li>
-            <li><a class="dropdown-item" href="/login">Login</a></li>
-
+        <ul
+          class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0"
+        >
+          <li><a
+              href="/admin"
+              class="nav-link px-2 link-secondary"
+            >Home</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
+          <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
         </ul>
+
+        <div class="dropdown text-end">
+          <a
+            href="#"
+            class="d-block link-dark text-decoration-none dropdown-toggle"
+            id="dropdownUser1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt="mdo"
+              width="32"
+              height="32"
+              class="rounded-circle"
+            />
+            {{#if loginSuccess}}
+              {{adminEmail}}
+            {{/if}}
+          </a>
+          <ul
+            class="dropdown-menu text-small"
+            aria-labelledby="dropdownUser1"
+            style=""
+          >
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="/admin/logout">Log out</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</header>
+  </header>
 </div>
 
-<div class="d-flex h-100 text-center text-white bg-dark">
+<div class="d-flex h-100 text-center bg-light">
 
   <div class="cover-container d-flex p-3 mx-auto my-auto flex-column">
     <main class="px-3">
       <h1>Admin Page</h1>
     </main>
+    <div class="container bg-light row my-3 mx-auto">
+      <h1 class="text-center my-5" id="table">Users List</h1>
+      <a
+        href="/admin/add-user"
+        class="btn btn-success col-12 col-lg-3 mx-auto my-2"
+      >Create User</a>
+      <table class="table" id="usersTable">
+        <thead>
+          <tr>
+            <th scope="col">User Name</th>
+            <th scope="col">E-Mail</th>
+            <th scope="col">Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+
+          {{#each user}}
+            <tr>
+              <td>{{this.name}}</td>
+              <td>{{this.email}}</td>
+              <td>{{this.date}}</td>
+              <td class="d-flex justify-content-between">
+                {{#if this.userBlocked}}
+                  <a
+                    href="/admin/unblock-user/{{this._id}}"
+                    class="btn btn-success"
+                    onclick="return confirm('Are You Sure To Unblock User {{this.name}}')"
+                  >Unblock</a>
+                {{else}}
+                  <a
+                    class="btn btn-warning"
+                    style="width: 82px;"
+                    onclick="blockUser('{{this._id}}')"
+                  >Block</a>
+                {{/if}}
+                <a
+                  class="btn btn-danger"
+                  onclick="deleteUser('{{this._id}}')"
+                >Delete</a>
+                <a
+                  href="/admin/edit-user/{{this._id}}"
+                  class="btn btn-primary"
+                >Edit</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
-<div class="container bg-light row my-5 mx-auto">
-    <h1 class="text-center my-5" id="table">Users List</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">User Name</th>
-      <th scope="col">E-Mail</th>
-      <th scope="col">Date</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each user}}
-        <tr>
-          
-          <td>{{this.name}}</td>
-          <td>{{this.email}}</td>
-          <td>{{this.date}}</td>
-          <td> 
-            <a href="/admin/delete-user/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are You Sure To Delete User {{this.name}}')">Delete</a> 
-            <a href="/admin/" class="btn btn-primary">Edit</a> 
-            </td>
-        </tr>
-    {{/each}}
-  </tbody>
-</table>
-</div>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+// sweet alert for delete user button
+  function deleteUser(id){ 
+    swal({ 
+      title: "Are you sure?",
+      text:"Once deleted, you will not be able to recover this user!",
+      icon:"warning",
+      buttons: true,
+      dangerMode: true,
+      })
+      .then((willDelete) => {
+        if(willDelete) { 
+          $.ajax({ 
+            url:"/delete-user",
+            method:"POST",
+            data:{id:id},
+            success:(result)=>{ 
+              if(result.status){ 
+                swal("User deleted Successfully", {
+                  icon: "success", 
+                });
+              } 
+              location.href='/admin' 
+            }
+          });
+        }
+      })
+    }
+
+
+// sweet alert for block user
+  function blockUser(id){ 
+    swal({ 
+      title: "Are you sure?",
+      text:"You want to block the user?",
+      icon:"warning",
+      buttons: true,
+      dangerMode: true,
+      })
+      .then((willBlock) => {
+        if(willBlock) { 
+          $.ajax({ 
+            url:"/block-user",
+            method:"POST",
+            data:{id:id},
+            success:(result)=>{ 
+              if(result.status){ 
+                swal("User Blocked Successfully", {
+                  icon: "success", 
+                });
+              } 
+              location.href='/admin' 
+            }
+          });
+        }
+      })
+    }
+</script>

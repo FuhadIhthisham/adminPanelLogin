@@ -9,62 +9,75 @@
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+              {{#if signupSuccess}}
+                <div
+                  class="alert alert-success alert-dismissible fade show"
+                  role="alert"
+                >
+                  <strong>Sign up Successfull</strong>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
+                </div>
+              {{/if}}
+              {{#if errorMsg}}
+                <div
+                  class="alert alert-warning alert-dismissible fade show"
+                  role="alert"
+                >
+                  <strong>User with this E-Mail already exists</strong>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
+                </div>
+              {{/if}}
+              <form action="/signup" method="POST" id="signupForm">
 
-              <form
-                action="/signup"
-                method="POST"
-              >
-
-                <div class="form-floating mb-3">
+                <div class="mb-3">
+                  <label for="">Your Name</label>
                   <input
                     type="text"
                     name="name"
                     class="form-control"
-                    id="floatingInput"
+                    id=""
                     placeholder="Your Name"
                   />
-                  <label for="floatingInput">Your Name</label>
                 </div>
-                <div class="form-floating mb-3">
+                <div class="mb-3">
+                  <label for="">Email address</label>
                   <input
                     type="email"
                     name="email"
                     class="form-control"
-                    id="floatingInput"
+                    id=""
                     placeholder="name@example.com"
                   />
-                  <label for="floatingInput">Email address</label>
                 </div>
-                <div class="form-floating mb-3">
+                <div class="mb-3">
+                  <label for="">Password</label>
                   <input
                     type="password"
                     name="pwd"
                     class="form-control"
-                    id="floatingPassword"
+                    id=""
                     placeholder="Password"
                   />
-                  <label for="floatingPassword">Password</label>
                 </div>
-
-                {{!-- <div class="form-floating mb-3">
-                  <input
-                    type="password"
-                    name="pwdConfirm"
-                    class="form-control"
-                    id="floatingPassword"
-                    placeholder="Repeat your Password"
-                  />
-                  <label for="floatingPassword">Repeat Your Password</label>
-                </div> --}}
-
                 <div class="form-check d-flex justify-content-center mb-5">
                   <input
                     class="form-check-input me-2"
                     type="checkbox"
-                    value=""
-                    id="form2Example3cg"
+                    name="formCheck"
+                    value="agree"
+                    id=""
                   />
-                  <label class="form-check-label" for="form2Example3g">
+                  <label class="form-check-label" for="">
                     I agree all statements in
                     <a href="#!" class="text-body"><u>Terms of service</u></a>
                   </label>

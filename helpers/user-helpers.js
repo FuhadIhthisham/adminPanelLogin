@@ -114,8 +114,8 @@ module.exports = {
       db.get()
         .collection(collections.USER_COLLECTION)
         .findOne({ _id: objectId(userId) })
-        .then((userData) => { 
-          console.log(userData)  /* Get user data of the editing user */
+        .then((userData) => {
+          console.log(userData); /* Get user data of the editing user */
           resolve(userData);
         });
     });
@@ -123,21 +123,52 @@ module.exports = {
 
   // update edited user data on database
   updateUserDetails: (userId, userDetails) => {
-    return new Promise((resolve, reject) => {
-      db.get()
+    return new Promise(async (resolve, reject) => {
+      let userEmail = await db
+        .get()
         .collection(collections.USER_COLLECTION)
-        .updateOne(
-          { _id: objectId(userId) },
-          {
-            $set: {
-              name: userDetails.name,
-              email: userDetails.email,
-            },
-          }
-        )
-        .then((userData) => {
-          resolve();
-        });
+        .findOne({ email: userDetails.email });
+      if (userDetails.email === userEmail?.email) {
+
+        db.get()
+          .collection(collections.USER_COLLECTION)
+          .updateOne(
+            { _id: objectId(userId) },
+            {
+              $set: {
+                name: userDetails.name,
+              },
+            }
+          )
+          .then((userData) => {
+            resolve({ status: false });
+          });
+          
+          // resolve({ status: true, msg: "User with this Email already exist" });
+          
+        } 
+        else{
+          resolve({ status: true, msg: "User with this Email already exist" });
+
+      }
+      // else if (userDetails.name === userEmail?.name) {
+      //   resolve({ status: true, msg: "User with this username already exist" });
+      // } else {
+      //   db.get()
+      //     .collection(collections.USER_COLLECTION)
+      //     .updateOne(
+      //       { _id: objectId(userId) },
+      //       {
+      //         $set: {
+      //           name: userDetails.name,
+      //           email: userDetails.email,
+      //         },
+      //       }
+      //     )
+      //     .then((userData) => {
+      //       resolve({ status: false });
+      //     });
+      // }
     });
   },
 };

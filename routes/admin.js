@@ -6,8 +6,10 @@ var userHelpers = require("../helpers/user-helpers");
 // initializing admin username and pass
 var adminEmail = "admin@gmail.com";
 var adminPass = "12345";
+const adminTrue = true
 var loginSuccess = false;
 var signOut = false;
+var errorMsg = ''
 
 /* GET users listing. */
 router.get("/", verifyLogin, function (req, res, next) {
@@ -30,7 +32,7 @@ function verifyLogin(req, res, next) {
     "Cache-Control",
     "no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0"
   );
-  if (req.session.isAdmin) {
+  if (req.session.isAdmin && adminTrue) {
     next();
   } else {
     res.render("admin/admin-login");
@@ -107,23 +109,28 @@ function adminVerify(req, res, next) {
 // });
 
 // unblock user from admin page
-router.get("/unblock-user/:id", (req, res) => {
-  let blockedId = req.params.id;
+router.post("/unblock-user", (req, res) => {
+  let blockedId = req.body.id;
   userHelpers.unblockUser(blockedId).then((data) => {
-    res.redirect("/admin");
+    res.json({status: true})
   });
 });
 
 // get a single user data to edit user page
-router.get("/edit-user/:id", async (req, res) => {
+router.get("/edit-user/:id",verifyLogin, async (req, res) => {
   let userDetails = await userHelpers.getSingleUserDetails(req.params.id);
-  res.render("admin/edit-user", { userDetails });
+  res.render("admin/edit-user", { userDetails, errorMsg});
 });
 
 // post the edited user data to server
 router.post("/edit-user/:id", async (req, res) => {
   userHelpers.updateUserDetails(req.params.id, req.body).then((response) => {
-    res.redirect("/admin");
+    errorMsg = response.msg
+    if (response.status) {
+      res.redirect(`/admin/edit-user/${req.params.id}`);
+    }else {
+      res.redirect("/admin");
+    }
   });
 });
 

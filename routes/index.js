@@ -88,7 +88,7 @@ router.post("/signup", (req, res) => {
 router.post("/block-user/", (req, res) => {
   let blockedId = req.body.id;
   userHelper.blockUser(blockedId).then((data) => {
-    if (req.session.userLoggedIn) {
+    if (req.session.userLoggedIn && req.session.user._id === blockedId) {
       delete req.session.userLoggedIn;
     }
     res.json({status: true});
@@ -100,7 +100,7 @@ router.post("/block-user/", (req, res) => {
 router.post("/delete-user/", (req, res) => {
   let userId = req.body.id;
   userHelper.deleteUser(userId).then((data) => {
-    if (req.session.userLoggedIn) {
+    if (req.session.userLoggedIn && req.session.user._id === userId) {
       delete req.session.userLoggedIn;
     }
     res.json({status: true})
